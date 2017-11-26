@@ -7,27 +7,28 @@ class vertice(object):
         self.info = info
         self.arestas = ars.arestas()
 
-    def addAresta(self, fonte, dest, ClassDest, info=[]):
-        return self.arestas.addAresta(fonte, dest, ClassDest, info)
+    def addAresta(self, fonte, dest, ClassDest, peso=1, info=[]):
+        return self.arestas.addAresta(fonte, dest, ClassDest, peso, info)
 
-    def printX(self):
-        print("{}[ {} ]".format(self.rotulo, self.id))
+    def print(self, x):
+        if x == 1:
+            print("{}[ {} ]".format(self.rotulo, self.id))
+        elif x == 2:
+            print("Vertice {}".format(self.rotulo))
+            for i in self.arestas.getListClassArestas():
+                i.print()
+        elif x == 3:
+            print("{}  {}".format(self.rotulo, self.info))
 
-    def printY(self):
-        print("Vertice {}".format(self.rotulo))
-        for i in self.arestas.getListClassArestas():
-            i.print()
-
-    def printZ(self):
-        print("{}  {}".format(self.rotulo, self.info))
-    
     def getRot(self):
         return self.rotulo
     def getId(self):
         return self.id
     def getInfo(self):
         return self.info
-    
+    def getArestas(self):
+        return self.arestas.getListClassArestas()
+
     def getListClassVertArestas(self):
         return self.arestas.getListClassVertArestas()
 
@@ -50,4 +51,3 @@ print(v.getInfo())
 
 print(type(vertice('a',0)))
 '''
-

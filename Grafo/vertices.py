@@ -10,7 +10,6 @@ class vertices(object):
             print("Rotulo do vertice deve ser do tipo string")
             return None
         if rotulo in self.listVerts.keys():
-            #print("Vertice '{}' ja existe".format(rotulo))
             return None
         self.listVerts[rotulo] = vt.vertice(rotulo, id, info)
         self.qtde += 1
@@ -22,6 +21,33 @@ class vertices(object):
             retorno.append(vertice)
         return retorno
 
+    def getMatrizAdj(self):
+        if self.qtde > 1000:
+            resp = input("Quantidade de vértices maior que 1000. Deseja continuar? s/n: ")
+            if resp.upper() == 'N':
+                return None
+        matrix = [[0 for x in range(self.qtde)] for y in range(self.qtde)]
+        for key, v1 in self.listVerts.items():
+            idV1 = v1.getId()
+            for v2 in v1.getListClassVertArestas():
+                idV2 = v2.getId()
+                matrix[idV1][idV2] = 1
+        return matrix
+
+    def getMatrizAdjPesos(self):
+        if self.qtde > 1000:
+            resp = input("Quantidade de vértices maior que 1000. Deseja continuar? s/n: ")
+            if resp.upper() == 'N':
+                return None
+        matrix = [[0 for x in range(self.qtde)] for y in range(self.qtde) ]
+        for key, v1 in self.listVerts.items():
+            idV1 = v1.getId()
+            arestas = v1.getArestas()
+            for a in arestas:
+                idV2 = a.getClassDest().getId()
+                matrix[idV1][idV2] = a.getPeso()
+        return matrix
+
     def buscaVertice(self, rotulo):
         if rotulo in self.listVerts.keys():
             return self.listVerts[rotulo]
@@ -32,7 +58,7 @@ class vertices(object):
 
     def setInfoVerts(self, v1=None, info=[]):
         if type(info) == type(list) and len(info) == 0:
-            return False            
+            return False
         if v1 != None:
             self.buscaVertice(v1).setInfo(info)
             return True
@@ -40,6 +66,6 @@ class vertices(object):
             v.setInfo(info)
         return True
 
-    def print(self):
+    def print(self, x):
         for key, valor in self.listVerts.items():
-            valor.printZ()
+            valor.print(x)

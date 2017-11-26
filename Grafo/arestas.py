@@ -6,8 +6,8 @@ class arestas(object):
         self.listArestas = {}
         self.qtde = 0
 
-    def addAresta(self, v1, v2, ClassV2, info=[]):
-        retorno = self.listArestas[v2] = ar.aresta(v1, v2, ClassV2, info)
+    def addAresta(self, v1, v2, ClassV2, peso, info=[]):
+        retorno = self.listArestas[v2] = ar.aresta(v1, v2, ClassV2, peso, info)
         if retorno == None:
             return False
         self.qtde += 1
@@ -20,7 +20,6 @@ class arestas(object):
 
     def getListClassArestas(self):
         retorno = []
-        print(retorno)
         for key, valor in self.listArestas.items():
             retorno.append( valor )
         return retorno
