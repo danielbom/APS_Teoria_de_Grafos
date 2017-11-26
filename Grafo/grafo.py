@@ -154,7 +154,7 @@ class grafo(object):
         dist = self.vertices.getMatrizAdjPesos()
         pred = self.vertices.getMatrizAdj()
         n = self.maxId
-            
+
         for i in range(n):
             for j in range(n):
                 if i != j and dist[i][j] == 0:
@@ -177,14 +177,14 @@ class grafo(object):
         print("FloydWarshall concluido")
 
         if n < 20:
-            print()         
+            print()
             for i in dist:
                 print(i)
 
             print()
             for i in pred:
                 print(i)
-        
+
 
 g = grafo()
 
@@ -237,6 +237,7 @@ g.addAresta('5', '4', 6)
 
 g.FloydWarshall()
 
+###DFS com pilha, sem recursao, tentativa de implementacao
 '''
     def DFS_(self, inicio=None):
         if inicio != None and type(inicio) != type(""):
