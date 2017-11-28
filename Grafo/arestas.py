@@ -7,11 +7,15 @@ class arestas(object):
         self.qtde = 0
 
     def addAresta(self, v1, v2, ClassV2, peso, info=[]):
-        retorno = self.listArestas[v2] = ar.aresta(v1, v2, ClassV2, peso, info)
-        if retorno == None:
+        self.listArestas[v2] = ar.aresta(v1, v2, ClassV2, peso, info)
+        q = self.qtde
+        self.qtde = len(self.listArestas)
+        if q == self.qtde:
             return False
-        self.qtde += 1
         return True
+
+    def getQtde(self):
+        return self.qtde
 
     def buscaAresta(self, v2):
         if v2 in self.listArestas.keys():

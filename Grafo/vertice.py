@@ -28,6 +28,8 @@ class vertice(object):
         return self.info
     def getArestas(self):
         return self.arestas.getListClassArestas()
+    def getQtdeArestas(self):
+        return self.arestas.getQtde()
 
     def getListClassVertArestas(self):
         return self.arestas.getListClassVertArestas()

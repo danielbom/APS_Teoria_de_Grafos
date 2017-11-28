@@ -48,6 +48,12 @@ class vertices(object):
                 matrix[idV1][idV2] = a.getPeso()
         return matrix
 
+    def getQtdeArestas(self):
+        qtde = 0
+        for key, i in self.listVerts.items():
+            qtde += i.getQtdeArestas()
+        return qtde
+
     def buscaVertice(self, rotulo):
         if rotulo in self.listVerts.keys():
             return self.listVerts[rotulo]
