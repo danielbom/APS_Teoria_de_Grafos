@@ -8,6 +8,10 @@ import math
 import random
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 =======
 
 >>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
@@ -33,12 +37,18 @@ class grafo(object):
         return None
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def getQtdeVertices(self):
         return self.maxId
 
     def getQtdeArestas(self):
         return self.vertices.getQtdeArestas()
 
+=======
+    def getQntdeVertice(self):
+        return self.maxId
+
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 =======
     def getQntdeVertice(self):
         return self.maxId
@@ -80,7 +90,10 @@ class grafo(object):
         # informações uteis
         distancias = [0 for i in range(self.maxId - 1)]
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 =======
 >>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
         fila = fl.fila()
@@ -110,9 +123,12 @@ class grafo(object):
         
         print(distancias)
 <<<<<<< HEAD
+<<<<<<< HEAD
         if self.maxId < 20:
             self.print(3)
 =======
+=======
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
         fila.enfileira( v )
         print("BSF concluída")
         #self.print()
@@ -144,9 +160,15 @@ class grafo(object):
                 u = Vertices[0]
                 Vertices.pop(0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         self.print(3)
         self.vertices.setInfoVerts(None,None)
+=======
+        self.print(3)
+        self.vertices.setInfoVerts(None,None)
+        #self.print(3)
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 =======
         self.print(3)
         self.vertices.setInfoVerts(None,None)
@@ -176,10 +198,13 @@ class grafo(object):
         print(self.DFS_Khan())
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
     def DFS(self, first=None, tipo=None):
 =======
+=======
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
     def DFS_2_(self, first=None):
 >>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
         if first != None and type(first) != type(""):
@@ -299,6 +324,7 @@ class grafo(object):
     def getVertices(self):
         return self.vertices.getVerts()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -374,6 +400,10 @@ print(g.DFS(me))
 =======
 
 
+=======
+
+
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 if __name__ == '__main__':
     g = grafo('amigos.txt')
 
@@ -422,4 +452,7 @@ if __name__ == '__main__':
     #g.DFS()
     #g.Khan()
     #g.FloydWarshall()
+<<<<<<< HEAD
+>>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
+=======
 >>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
