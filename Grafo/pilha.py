@@ -10,7 +10,6 @@ class pilha(object):
 
     def empilha(self, valor):
         self.vet.append(valor)
-        self.vet.insert(0, valor)
 
     def vazia(self):
         if len(self.vet) == 0:
@@ -25,3 +24,4 @@ class pilha(object):
     
     def getTopo(self):
         return self.vet[-1]
+
