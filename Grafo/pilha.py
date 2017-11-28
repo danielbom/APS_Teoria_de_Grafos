@@ -10,14 +10,6 @@ class pilha(object):
 
     def empilha(self, valor):
         self.vet.append(valor)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        self.vet.insert(0, valor)
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
-        self.vet.insert(0, valor)
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 
     def vazia(self):
         if len(self.vet) == 0:
@@ -32,10 +24,4 @@ class pilha(object):
     
     def getTopo(self):
         return self.vet[-1]
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf

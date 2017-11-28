@@ -7,14 +7,7 @@ import pilha as pl
 import math
 import random
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
-
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 class grafo(object):
     def __init__(self, filename):
         self.vertices = vts.vertices()
@@ -36,24 +29,18 @@ class grafo(object):
             return result
         return None
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     def getQtdeVertices(self):
         return self.maxId
 
     def getQtdeArestas(self):
         return self.vertices.getQtdeArestas()
 
-=======
     def getQntdeVertice(self):
         return self.maxId
 
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
     def getQntdeVertice(self):
         return self.maxId
 
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
     def addAresta(self, v1, v2, peso=1, info=[]):
         if type(v1) != type("") or type(v2) != type(""):
             print("Rotulos devem ser do tipo string")
@@ -89,13 +76,7 @@ class grafo(object):
 
         # informações uteis
         distancias = [0 for i in range(self.maxId - 1)]
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
         fila = fl.fila()
         fila.enfileira( v0 )
         if fila.vazia():
@@ -122,17 +103,11 @@ class grafo(object):
             tam -= 1
         
         print(distancias)
-<<<<<<< HEAD
-<<<<<<< HEAD
         if self.maxId < 20:
             self.print(3)
-=======
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
+
         fila.enfileira( v )
         print("BSF concluída")
-        #self.print()
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 
     def DFSRec(self, inicio=None):
         if inicio != None and type(inicio) != type(""):
@@ -159,23 +134,10 @@ class grafo(object):
             if len(Vertices) != 0:
                 u = Vertices[0]
                 Vertices.pop(0)
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-        self.print(3)
-        self.vertices.setInfoVerts(None,None)
-=======
-        self.print(3)
-        self.vertices.setInfoVerts(None,None)
-        #self.print(3)
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
-        self.print(3)
-        self.vertices.setInfoVerts(None,None)
-        #self.print(3)
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
         print("DFS concluida")
-        
+        #self.print(3)
+        self.vertices.setInfoVerts(None,None)
 
     def DFS_Visit(self, Vertices, u):
         self.tempo += 1
@@ -197,16 +159,8 @@ class grafo(object):
         # Dificil esse eim...
         print(self.DFS_Khan())
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
     def DFS(self, first=None, tipo=None):
-=======
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-    def DFS_2_(self, first=None):
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
         if first != None and type(first) != type(""):
             return None
         self.vertices.setInfoVerts(v1=None, info=['b', None, math.inf, math.inf])
@@ -323,89 +277,12 @@ class grafo(object):
 
     def getVertices(self):
         return self.vertices.getVerts()
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-
-
-g = grafo()
-
-# Grafo denso
-# Desordenado
-
-for i in range(1000000):
-    g.addAresta(str(random.randrange(500)),str(random.randrange(400)))
-
-# Se der azar é possivel acontecer aki tambem o q acontece no semi ordenado para DSP(recursivo)
-# FloydWarshal(FW) demora muito mesmo com +1000 elementos
-# FW com 500 demora, mas termina kk
-
-
-# Semi ordenado
-'''
-for i in range(1000):
-    g.addAresta(str(i), str(i+1))
-'''
-# Para DFS recursiva, com ~1000 (- q isso funciona) elementos neste modo, alcança
-# a profundidade maxima da recursao e retorna um erro
-
-# Grafo simples
-'''
-g.addAresta('1', '2', 3)
-g.addAresta('1', '6', -4)
-g.addAresta('2', '3', 8)
-g.addAresta('2', '5', 1)
-g.addAresta('3', '6', 7)
-g.addAresta('6', '1', 4)
-'''
-
-print("Insercao concluida")
-print("Quantidade de vertices inseridos: {}".format(g.getQtdeVertices()))
-print("Quantidade de arestas existentes: {}".format(g.getQtdeArestas()))
-
-
-me = g.getVertices()[0].getRot()
-'''
-print("\nVertice analisado: {}".format(me))
-friends = g.FriendsForMe(me)
-print("Total de amigos encontrados: {}".format(len(friends)))
-p = []
-for i in friends:
-    p.append(i.getRot())
-print(p)
-'''
-
-
-'''
-g.addAresta('1', '2', 3)
-g.addAresta('1', '5', -4)
-g.addAresta('1', '3', 8)
-g.addAresta('2', '4', 1)
-g.addAresta('2', '5', 7)
-g.addAresta('3', '2', 4)
-g.addAresta('4', '3', -5)
-g.addAresta('4', '1', 2)
-g.addAresta('5', '4', 6)
-'''
-#g.print()
-
-#g.BFS(me)
-
-print(g.DFS(me))
-
-#g.Khan()
-
-#g.FloydWarshall()
-
-=======
-
-
-=======
-
-
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
 if __name__ == '__main__':
     g = grafo('amigos.txt')
+    print("Insercao concluida")
+    print("Quantidade de vertices inseridos: {}".format(g.getQtdeVertices()))
+    print("Quantidade de arestas existentes: {}".format(g.getQtdeArestas()))
 
     '''
     Grafo denso desordenado   
@@ -452,7 +329,45 @@ if __name__ == '__main__':
     #g.DFS()
     #g.Khan()
     #g.FloydWarshall()
-<<<<<<< HEAD
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
-=======
->>>>>>> b713866d0fba99c5b0014f42ae152625a211bbaf
+
+def testes():
+    #g = grafo()
+
+    # Grafo denso
+    # Desordenado
+    '''
+    for i in range(1000000):
+        g.addAresta(str(random.randrange(500)),str(random.randrange(400)))
+    '''
+    # Se der azar é possivel acontecer aki tambem o q acontece no semi ordenado para DSP(recursivo)
+    # FloydWarshal(FW) demora muito mesmo com +1000 elementos
+    # FW com 500 demora, mas termina kk
+
+    # Semi ordenado
+    '''
+    for i in range(1000):
+        g.addAresta(str(i), str(i+1))
+    '''
+    # Para DFS recursiva, com ~1000 (- q isso funciona) elementos neste modo, alcança
+    # a profundidade maxima da recursao e retorna um erro
+
+    # Grafo simples
+    '''
+    g.addAresta('1', '2', 3)
+    g.addAresta('1', '6', -4)
+    g.addAresta('2', '3', 8)
+    g.addAresta('2', '5', 1)
+    g.addAresta('3', '6', 7)
+    g.addAresta('6', '1', 4)
+    '''
+    
+    #me = g.getVertices()[0].getRot()
+    '''
+    print("\nVertice analisado: {}".format(me))
+    friends = g.FriendsForMe(me)
+    print("Total de amigos encontrados: {}".format(len(friends)))
+    p = []
+    for i in friends:
+        p.append(i.getRot())
+    print(p)
+    '''
