@@ -9,11 +9,11 @@ import random
 
 
 class grafo(object):
-    def __init__(self, filename):
+    def __init__(self):
         self.vertices = vts.vertices()
         self.maxId = 0  # indicador de quantidade e controle para uso do FloydWarshall
         self.tempo = 0
-        self.load_nodes(filename)
+        
 
     def load_nodes(self, filename):
         with open(filename) as file:
@@ -230,6 +230,7 @@ class grafo(object):
         for amigo in amigos:
             setAmigos.append(amigo.getListClassVertArestas())
 
+        
         amigosEmComum = set()
 
         amigosEmComum = set(setAmigos[0])
@@ -279,11 +280,30 @@ class grafo(object):
         return self.vertices.getVerts()
 
 if __name__ == '__main__':
-    g = grafo('amigos.txt')
+    g = grafo()
+    #g.load_nodes('amigos.txt')
+    g.addAresta('1', '2', 3)
+    g.addAresta('1', '5', -4)
+    g.addAresta('1', '3', 8)
+    g.addAresta('2', '4', 1)
+    g.addAresta('2', '5', 7)
+    g.addAresta('3', '2', 4)
+    g.addAresta('4', '3', -5)
+    g.addAresta('4', '1', 2)
+    g.addAresta('5', '4', 6)
     print("Insercao concluida")
     print("Quantidade de vertices inseridos: {}".format(g.getQtdeVertices()))
     print("Quantidade de arestas existentes: {}".format(g.getQtdeArestas()))
 
+
+    #me = g.getVertices()[0].getRot()
+    me = '3'
+    print("\nVertice analisado: {}".format(me))
+    friends = g.FriendsForMe(me)
+    print("Total de amigos encontrados: {}".format(len(friends)))
+    p = [i.getRot() for i in friends]
+
+    print(p)
     '''
     Grafo denso desordenado   
 
