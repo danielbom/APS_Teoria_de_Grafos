@@ -13,7 +13,6 @@ class grafo(object):
         self.vertices = vts.vertices()
         self.maxId = 0  # indicador de quantidade e controle para uso do FloydWarshall
         self.tempo = 0
-        
 
     def load_nodes(self, filename):
         with open(filename) as file:
@@ -101,7 +100,7 @@ class grafo(object):
         while distancias[tam-1] == 0:
             distancias.pop(-1)
             tam -= 1
-        
+
         print(distancias)
         if self.maxId < 20:
             self.print(3)
@@ -153,11 +152,6 @@ class grafo(object):
         self.tempo += 1
         infoU = u.getInfo()
         u.setInfo(['p', infoU[1],infoU[2], self.tempo])
-
-
-    def Khan(self):
-        # Dificil esse eim...
-        print(self.DFS_Khan())
 
 
     def DFS(self, first=None, tipo=None):
@@ -216,12 +210,12 @@ class grafo(object):
         if self.maxId < 20:
             self.print(3)
 
-        
+
         results = []
         results.append(ciclo)
         return results
 
-  
+
     def FriendsForMe(self, inicio):
         me = self.vertices.buscaVertice(inicio)
         amigos = me.getListClassVertArestas()
@@ -230,12 +224,12 @@ class grafo(object):
         for amigo in amigos:
             setAmigos.append(amigo.getListClassVertArestas())
 
-        
+
         amigosEmComum = set()
 
         amigosEmComum = set(setAmigos[0])
         for i in range( 1, len(setAmigos)):
-            amigosEmComum = amigosEmComum.intersection(set(setAmigos[i])) 
+            amigosEmComum = amigosEmComum.intersection(set(setAmigos[i]))
 
 
         return amigosEmComum
@@ -279,23 +273,44 @@ class grafo(object):
     def getVertices(self):
         return self.vertices.getVerts()
 
+    def Khan(self):
+        #r = self.DFS()
+        #print(r[0])
+        visitados = [False for i in range (self.maxId)]
+        arestas = self.vertices.getArestasSort()
+        fontes = self.vertices.getFontes()
+        listaOrdenada = []
+        while len(fontes) != 0:
+            n = fontes.pop(0)
+            listaOrdenada.append(n)
+            
+            pass
+        
+
 if __name__ == '__main__':
     g = grafo()
     #g.load_nodes('amigos.txt')
-    g.addAresta('1', '2', 3)
-    g.addAresta('1', '5', -4)
-    g.addAresta('1', '3', 8)
-    g.addAresta('2', '4', 1)
-    g.addAresta('2', '5', 7)
-    g.addAresta('3', '2', 4)
-    g.addAresta('4', '3', -5)
-    g.addAresta('4', '1', 2)
-    g.addAresta('5', '4', 6)
+    g.addAresta('142', '143')
+    g.addAresta('143', '321')
+    g.addAresta('143', '341')
+    g.addAresta('143', '370')
+    g.addAresta('143', '378')
+    g.addAresta('321', '322')
+    g.addAresta('321', '326')
+    g.addAresta('341', '401')
+    g.addAresta('378', '401')
+    g.addAresta('326', '421')
+    g.addAresta('326', '401')
+    g.addAresta('322', '421')
+    g.addAresta('322', '401')
     print("Insercao concluida")
     print("Quantidade de vertices inseridos: {}".format(g.getQtdeVertices()))
     print("Quantidade de arestas existentes: {}".format(g.getQtdeArestas()))
 
-
+    g.Khan()
+    #g.FloydWarshall()
+    #g.BFS('1')
+    '''
     #me = g.getVertices()[0].getRot()
     me = '3'
     print("\nVertice analisado: {}".format(me))
@@ -305,7 +320,9 @@ if __name__ == '__main__':
 
     print(p)
     '''
-    Grafo denso desordenado   
+
+    '''
+    Grafo denso desordenado
 
     for i in range(100000):
         g.addAresta(str(random.randrange(100)), str(random.randrange(100)))
@@ -380,7 +397,7 @@ def testes():
     g.addAresta('3', '6', 7)
     g.addAresta('6', '1', 4)
     '''
-    
+
     #me = g.getVertices()[0].getRot()
     '''
     print("\nVertice analisado: {}".format(me))

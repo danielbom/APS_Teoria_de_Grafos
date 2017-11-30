@@ -14,37 +14,16 @@ class arestas(object):
             return False
         return True
 
-    def getQtde(self):
-        return self.qtde
-
     def buscaAresta(self, v2):
         if v2 in self.listArestas.keys():
             return self.listArestas[v2]
         return None
 
     def getListClassArestas(self):
-        retorno = []
-        for key, valor in self.listArestas.items():
-            retorno.append( valor )
-        return retorno
+        return [v for v in self.listArestas.values()]
 
     def getListClassVertArestas(self):
-        retorno = []
-        for key, aresta in self.listArestas.items():
-            retorno.append( aresta.getClassDest() )
-        return retorno
+        return [a.getClassDest() for a in self.listArestas.values()]
 
-
-'''
-ars = arestas()
-
-ars.addAresta('a','b',vta.vertice('b',0))
-
-ars.addAresta('a','c',vta.vertice('c',0))
-
-ars.addAresta('a','d',vta.vertice('d',0))
-
-print(ars.getListClassArestas())
-
-print(ars.buscaAresta('c'))
-'''
+    def getQtde(self):
+        return self.qtde

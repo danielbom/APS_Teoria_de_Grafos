@@ -10,16 +10,6 @@ class vertice(object):
     def addAresta(self, fonte, dest, ClassDest, peso=1, info=[]):
         return self.arestas.addAresta(fonte, dest, ClassDest, peso, info)
 
-    def print(self, x):
-        if x == 1:
-            print("{}[ {} ]".format(self.rotulo, self.id))
-        elif x == 2:
-            print("Vertice {}".format(self.rotulo))
-            for i in self.arestas.getListClassArestas():
-                i.print()
-        elif x == 3:
-            print("{}  {}".format(self.rotulo, self.info))
-
     def getRot(self):
         return self.rotulo
     def getId(self):
@@ -31,6 +21,9 @@ class vertice(object):
     def getQtdeArestas(self):
         return self.arestas.getQtde()
 
+    def getListClassArestas(self):
+        return self.arestas.getListClassArestas()
+
     def getListClassVertArestas(self):
         return self.arestas.getListClassVertArestas()
 
@@ -41,15 +34,12 @@ class vertice(object):
     def setRot(self, rotulo):
         self.rotulo = rotulo
 
-'''
-v = vertice("a", 0)
-
-print(v.getRot())
-
-print(v.getId())
-
-print(v.getInfo())
-
-
-print(type(vertice('a',0)))
-'''
+    def print(self, x):
+        if x == 1:
+            print("{}[ {} ]".format(self.rotulo, self.id))
+        elif x == 2:
+            print("Vertice {}".format(self.rotulo))
+            for i in self.arestas.getListClassArestas():
+                i.print()
+        elif x == 3:
+            print("{}  {}".format(self.rotulo, self.info))

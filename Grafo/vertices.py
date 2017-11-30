@@ -1,4 +1,5 @@
 import vertice as vt
+import operator
 
 class vertices(object):
     def __init__(self):
@@ -15,11 +16,28 @@ class vertices(object):
         self.qtde += 1
         return self.listVerts[rotulo]
 
+    def buscaVertice(self, rotulo):
+        if rotulo in self.listVerts.keys():
+            return self.listVerts[rotulo]
+        return None
+
+    def getQtde(self):
+        return self.qtde
+
     def getVerts(self):
-        retorno = []
-        for key, vertice in self.listVerts.items():
-            retorno.append(vertice)
-        return retorno
+        return [ v for v in self.listVerts.values()]
+
+    def getArestas(self):
+        return [v.getArestas() for v in self.listVerts.values()]
+
+    def getArestasSort(self):
+        arestas = self.getArestas()
+        temp = []
+        for i in arestas:
+            for j in i:
+                temp.append(j)
+        temp.sort(key=operator.attrgetter('peso'))
+        return temp
 
     def getMatrizAdj(self):
         if self.qtde > 1000:
@@ -27,7 +45,7 @@ class vertices(object):
             if resp.upper() == 'N':
                 return None
         matrix = [[0 for x in range(self.qtde)] for y in range(self.qtde)]
-        for key, v1 in self.listVerts.items():
+        for v1 in self.listVerts.values():
             idV1 = v1.getId()
             for v2 in v1.getListClassVertArestas():
                 idV2 = v2.getId()
@@ -40,7 +58,7 @@ class vertices(object):
             if resp.upper() == 'N':
                 return None
         matrix = [[0 for x in range(self.qtde)] for y in range(self.qtde) ]
-        for key, v1 in self.listVerts.items():
+        for v1 in self.listVerts.values():
             idV1 = v1.getId()
             arestas = v1.getArestas()
             for a in arestas:
@@ -50,17 +68,27 @@ class vertices(object):
 
     def getQtdeArestas(self):
         qtde = 0
-        for key, i in self.listVerts.items():
+        for i in self.listVerts.values():
             qtde += i.getQtdeArestas()
         return qtde
 
-    def buscaVertice(self, rotulo):
-        if rotulo in self.listVerts.keys():
-            return self.listVerts[rotulo]
-        return None
+    def getSorvedouros(self):
+        retorno = []
+        for i in self.listVerts.values():
+            if i.getQtdeArestas() == 0:
+                retorno.append(i)
+        return retorno
 
-    def getQtde(self):
-        return self.qtde
+    def getFontes(self):
+        vertices = {i.getRot(): i for i in self.getVerts()}
+        remova = set()
+        for v1 in vertices.values():
+            for v2 in v1.getListClassArestas():
+                if v2.getDest() in vertices:
+                    remova.add(v2.getDest())
+        for i in remova:
+            vertices.pop(i)
+        return [v for v in vertices.values()]
 
     def setInfoVerts(self, v1=None, info=[]):
         if type(info) == type(list) and len(info) == 0:

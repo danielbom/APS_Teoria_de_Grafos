@@ -10,9 +10,6 @@ class aresta(object):
         self.info = info
         self.peso = peso
 
-    def print(self):
-        print("{} -> {}".format(self.fonte, self.destino))
-
     def getFont(self):
         return self.fonte
     def getDest(self):
@@ -27,21 +24,5 @@ class aresta(object):
     def setInfo(self, info):
         self.info = info
 
-'''
-a = aresta('a', 'b', vt.vertice('b',0))
-
-print(a.getFont())
-
-print(a.getDest())
-
-print(a.getClassDest())
-
-print(a.getInfo())
-
-print(a.getClassDest().getRot())
-
-print(a.getClassDest().getId())
-
-print(a.getClassDest().getInfo())
-
-'''
+    def print(self):
+        print("{} -> {}".format(self.fonte, self.destino))
