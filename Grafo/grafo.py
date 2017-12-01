@@ -4,8 +4,9 @@ import aresta as ar
 import arestas as ars
 import fila as fl
 import pilha as pl
+import estatistic as est
 import math
-import random
+import numpy as np
 
 
 class grafo(object):
@@ -55,6 +56,7 @@ class grafo(object):
 
         if ClassV2 != None:
             ClassV1.addAresta(v1, v2, ClassV2, peso, info)
+            ClassV2.addAresta(v2, v1, ClassV1, peso, info) # Nao orientado
 
         return True
 
@@ -82,7 +84,7 @@ class grafo(object):
             self.vertices.setInfoVerts(None)
             return None
 
-        print("BFS iniciada")
+        #print("BFS iniciada")
         while not fila.vazia():
             u = fila.desenfileira()
             for v in u.getListClassVertArestas():
@@ -94,20 +96,39 @@ class grafo(object):
                     fila.enfileira( v )
             infoU = u.getInfo()
             u.setInfo(['p', infoU[1], infoU[2]])
-        print("BSF concluída")
+        #print("BSF concluída")
 
-        tam = len(distancias)
-        while distancias[tam-1] == 0:
-            distancias.pop(-1)
-            tam -= 1
+        while 0 in distancias:
+            distancias.remove(0)
 
-        print(distancias)
+        #print(distancias)
         if self.maxId < 20:
             self.print(3)
+        
+        self.vertices.setInfoVerts(v1=None, info=None)
+        return distancias
 
-        fila.enfileira( v )
-        print("BSF concluída")
+    def analises_BFS(self):
+        vertices = [i.getRot() for i in self.vertices.getVerts()] # Pego o nome de todos os vertices
+        distancias = [self.BFS(i) for i in vertices] # Executo para todos os vertices uma BFS
+        var_all = est.varN(distancias) # Calculo a variancia de todos
+        dp_all = est.dpN(distancias) # Desvio padrao de todos
+        min_max = est.minmaxN(distancias) # MinMax aplicado ao normalizador - Normalização
+        p_each_exe = est.porcentualNN(distancias) # Calcula o porcentual de cada distancia
+        
+        print("\nPorcentagem de todos juntos")
+        print(p_each_exe)
+        print("Minmax do conjunto das porcentagens")
+        print(min_max)
 
+
+
+
+
+
+
+
+        
     def DFSRec(self, inicio=None):
         if inicio != None and type(inicio) != type(""):
             return None
@@ -285,8 +306,7 @@ class grafo(object):
             listaOrdenada.append(n)
             
             pass
-        
-
+'''
 if __name__ == '__main__':
     g = grafo()
     #g.load_nodes('amigos.txt')
@@ -306,11 +326,12 @@ if __name__ == '__main__':
     print("Insercao concluida")
     print("Quantidade de vertices inseridos: {}".format(g.getQtdeVertices()))
     print("Quantidade de arestas existentes: {}".format(g.getQtdeArestas()))
-
+    
     g.Khan()
+'''
     #g.FloydWarshall()
     #g.BFS('1')
-    '''
+'''
     #me = g.getVertices()[0].getRot()
     me = '3'
     print("\nVertice analisado: {}".format(me))
@@ -319,15 +340,13 @@ if __name__ == '__main__':
     p = [i.getRot() for i in friends]
 
     print(p)
-    '''
 
-    '''
     Grafo denso desordenado
 
     for i in range(100000):
         g.addAresta(str(random.randrange(100)), str(random.randrange(100)))
     print("Insercao concluida")
-    '''
+'''
 
     # Se der azar é possivel acontecer aki tambem o q acontece no semi ordenado para DSP(recursivo)
     # FloydWarshal(FW) demora muito mesmo com +1000 elementos
@@ -335,14 +354,14 @@ if __name__ == '__main__':
 
 
     # Semi ordenado
-    '''
+'''
     for i in range(1000):
         g.addAresta(str(i), str(i+1))
     print("Insercao concluida")
-    '''
+'''
     # Para DFS recursiva, com ~1000 (- q isso funciona) elementos neste modo, alcança
     # a profundidade maxima da recursao e retorna um erro
-    '''
+'''
     maluco = g.getVertices()[0].getRot()
     print(maluco)
     print(len(g.FriendsForMe(maluco)))
@@ -358,7 +377,7 @@ if __name__ == '__main__':
     g.addAresta('4', '3', -5)
     g.addAresta('4', '1', 2)
     g.addAresta('5', '4', 6)
-    '''
+'''
 
     #g.DFS_2_('1')
     #g.print()
@@ -367,39 +386,39 @@ if __name__ == '__main__':
     #g.Khan()
     #g.FloydWarshall()
 
-def testes():
+#def testes():
     #g = grafo()
 
     # Grafo denso
     # Desordenado
-    '''
+'''
     for i in range(1000000):
         g.addAresta(str(random.randrange(500)),str(random.randrange(400)))
-    '''
+'''
     # Se der azar é possivel acontecer aki tambem o q acontece no semi ordenado para DSP(recursivo)
     # FloydWarshal(FW) demora muito mesmo com +1000 elementos
     # FW com 500 demora, mas termina kk
 
     # Semi ordenado
-    '''
+'''
     for i in range(1000):
         g.addAresta(str(i), str(i+1))
-    '''
+'''
     # Para DFS recursiva, com ~1000 (- q isso funciona) elementos neste modo, alcança
     # a profundidade maxima da recursao e retorna um erro
 
     # Grafo simples
-    '''
+'''
     g.addAresta('1', '2', 3)
     g.addAresta('1', '6', -4)
     g.addAresta('2', '3', 8)
     g.addAresta('2', '5', 1)
     g.addAresta('3', '6', 7)
     g.addAresta('6', '1', 4)
-    '''
+'''
 
     #me = g.getVertices()[0].getRot()
-    '''
+'''
     print("\nVertice analisado: {}".format(me))
     friends = g.FriendsForMe(me)
     print("Total de amigos encontrados: {}".format(len(friends)))
@@ -407,4 +426,4 @@ def testes():
     for i in friends:
         p.append(i.getRot())
     print(p)
-    '''
+'''
