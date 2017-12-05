@@ -7,6 +7,7 @@ import pilha as pl
 import estatistic as est
 import math
 import numpy as np
+from operator import attrgetter
 
 
 class grafo(object):
@@ -68,6 +69,11 @@ class grafo(object):
             return None
         self.vertices.setInfoVerts(v1=None, info=['b', math.inf, None])
 
+        #######################################################
+        print("Inicial: ")
+        print(inicio)
+        #######################################################
+
         v0 = self.vertices.buscaVertice(inicio)
         if v0 == None:
             self.vertices.setInfoVerts(None)
@@ -101,6 +107,21 @@ class grafo(object):
         while 0 in distancias:
             distancias.remove(0)
 
+        #######################################################
+        print()
+        maisDistantes = []
+        md = self.vertices.getVerts()
+        for v in md:
+            infoV = v.getInfo()
+            if infoV[1] == len(distancias)-1:
+                maisDistantes.append(v)
+        
+        for i in maisDistantes[:10]:
+            print(i.getRot())
+        
+        exit(0)
+        #######################################################
+
         #print(distancias)
         if self.maxId < 20:
             self.print(3)
@@ -111,24 +132,58 @@ class grafo(object):
     def analises_BFS(self):
         vertices = [i.getRot() for i in self.vertices.getVerts()] # Pego o nome de todos os vertices
         distancias = [self.BFS(i) for i in vertices] # Executo para todos os vertices uma BFS
-        var_all = est.varN(distancias) # Calculo a variancia de todos
-        dp_all = est.dpN(distancias) # Desvio padrao de todos
-        min_max = est.minmaxN(distancias) # MinMax aplicado ao normalizador - Normalização
-        p_each_exe = est.porcentualNN(distancias) # Calcula o porcentual de cada distancia
+        #var_all = est.varN(distancias) # Calculo a variancia de todos
+        #dp_all = est.dpN(distancias) # Desvio padrao de todos
+        #min_max = est.minmaxN(distancias) # MinMax aplicado ao normalizador - Normalização
+        sum_total = est.sumN(distancias) # Calcula o porcentual de cada distancia
         
-        print("\nPorcentagem de todos juntos")
-        print(p_each_exe)
-        print("Minmax do conjunto das porcentagens")
-        print(min_max)
+        amount = len(distancias)
+        avg_total = [ i/amount for i in sum_total]
 
-
-
-
-
-
-
-
+        print("\nSoma total de cada nível de distancias")
+        distancia = 1
+        for i in sum_total:
+            print("{} - {}".format(distancia,i))
+            distancia += 1
         
+        print("\nMedia de cada distancia")
+        distancia = 1
+        for i in avg_total:
+            print("{} - {}".format(distancia,i))
+            distancia += 1
+
+    ##############################################################################################
+    ##################################### Funcoes sem testes #####################################
+    def Dijkstra(self, inicio):
+        self.vertices.setInfoVerts(v1=None  , info=math.inf)
+        self.vertices.setInfoVerts(v1=inicio, info=0)
+        Q = self.vertices.getVerts()
+        p = [None for v in self.vertices.getQntdeVertice()]
+        
+        while len(Q) != 0:
+            u = min(Q,key=attrgetter('info'))
+            Q.pop(u)
+            for a in u.getListClassArestas():
+                if u.getInfo() > a.getClassDest().getInfo() + a.getPeso():
+                    v.setInfo( a.getClassDest().getInfo() + a.getPeso() ) # relaxamento
+                    p[v.getId()] = a.getClassDest()
+
+    def BellmanFord(self, inicio):
+        d = [0 for v in self.vertices.getQntdeVertice()]
+        p = [None for v in self.vertices.getQntdeVertice()]
+
+        d[inicio] = 0
+        relaxou = True
+        for i in self.vertices.getQntdeVertice() and relaxou:
+            relaxou = False
+            for v in self.vertices.getVerts():
+                for a in v.getListClassArestas():
+                    if d[v.getId()] > d[a.getClassDest().getId()] + a.getPeso():
+                        d[v.getId()] = d[a.getClassDest().getId()] + a.getPeso() # relaxamento
+                        p[v.getId()] = a.getClassDest()
+                        relaxou = True
+    
+    ##############################################################################################
     def DFSRec(self, inicio=None):
         if inicio != None and type(inicio) != type(""):
             return None
@@ -173,7 +228,6 @@ class grafo(object):
         self.tempo += 1
         infoU = u.getInfo()
         u.setInfo(['p', infoU[1],infoU[2], self.tempo])
-
 
     def DFS(self, first=None, tipo=None):
         if first != None and type(first) != type(""):
@@ -236,7 +290,6 @@ class grafo(object):
         results.append(ciclo)
         return results
 
-
     def FriendsForMe(self, inicio):
         me = self.vertices.buscaVertice(inicio)
         amigos = me.getListClassVertArestas()
@@ -254,7 +307,6 @@ class grafo(object):
 
 
         return amigosEmComum
-
 
     def FloydWarshall(self):
         dist = self.vertices.getMatrizAdjPesos()
