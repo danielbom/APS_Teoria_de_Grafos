@@ -96,10 +96,14 @@ class vertices(object):
         if v1 != None:
             self.buscaVertice(v1).setInfo(info)
             return True
-        for key, v in self.listVerts.items():
+        for v in self.listVerts.values():
             v.setInfo(info)
         return True
 
+    def setInfoArestas(self, info):
+        for v in self.listVerts.values():
+            v.setInfoArestas(info)
+    
     def print(self, x):
         for key, valor in self.listVerts.items():
             valor.print(x)

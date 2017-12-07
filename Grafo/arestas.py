@@ -27,3 +27,7 @@ class arestas(object):
 
     def getQtde(self):
         return self.qtde
+
+    def setInfoArestas(self, info):
+        for a in self.listArestas.values():
+            a.setInfo(info)

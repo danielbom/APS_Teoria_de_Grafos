@@ -70,8 +70,8 @@ class grafo(object):
         self.vertices.setInfoVerts(v1=None, info=['b', math.inf, None])
 
         #######################################################
-        print("Inicial: ")
-        print(inicio)
+        #print("Inicial: ")
+        #print(inicio)
         #######################################################
 
         v0 = self.vertices.buscaVertice(inicio)
@@ -108,6 +108,7 @@ class grafo(object):
             distancias.remove(0)
 
         #######################################################
+        '''
         print()
         maisDistantes = []
         md = self.vertices.getVerts()
@@ -120,6 +121,7 @@ class grafo(object):
             print(i.getRot())
         
         exit(0)
+        '''
         #######################################################
 
         #print(distancias)
@@ -135,7 +137,7 @@ class grafo(object):
         #var_all = est.varN(distancias) # Calculo a variancia de todos
         #dp_all = est.dpN(distancias) # Desvio padrao de todos
         #min_max = est.minmaxN(distancias) # MinMax aplicado ao normalizador - Normalização
-        sum_total = est.sumN(distancias) # Calcula o porcentual de cada distancia
+        sum_total = est.sumN(distancias) # Soma cada coluna de distancia
         
         amount = len(distancias)
         avg_total = [ i/amount for i in sum_total]
@@ -158,23 +160,26 @@ class grafo(object):
         self.vertices.setInfoVerts(v1=None  , info=math.inf)
         self.vertices.setInfoVerts(v1=inicio, info=0)
         Q = self.vertices.getVerts()
-        p = [None for v in self.vertices.getQntdeVertice()]
+        p = [None for v in range(self.vertices.getQtde())]
         
         while len(Q) != 0:
             u = min(Q,key=attrgetter('info'))
-            Q.pop(u)
+            Q.remove(u)
             for a in u.getListClassArestas():
                 if u.getInfo() > a.getClassDest().getInfo() + a.getPeso():
-                    v.setInfo( a.getClassDest().getInfo() + a.getPeso() ) # relaxamento
-                    p[v.getId()] = a.getClassDest()
+                    u.setInfo( a.getClassDest().getInfo() + a.getPeso() ) # relaxamento
+                    p[u.getId()] = a.getClassDest()
 
     def BellmanFord(self, inicio):
-        d = [0 for v in self.vertices.getQntdeVertice()]
-        p = [None for v in self.vertices.getQntdeVertice()]
+        qtde = self.vertices.getQtde()
+        d = [0 for v in range(qtde)]
+        p = [None for v in range(qtde)]
 
-        d[inicio] = 0
+        v0 = self.vertices.buscaVertice(inicio)
+
+        d[v0.getId()] = 0
         relaxou = True
-        for i in self.vertices.getQntdeVertice() and relaxou:
+        for i in range(qtde):
             relaxou = False
             for v in self.vertices.getVerts():
                 for a in v.getListClassArestas():
@@ -182,7 +187,13 @@ class grafo(object):
                         d[v.getId()] = d[a.getClassDest().getId()] + a.getPeso() # relaxamento
                         p[v.getId()] = a.getClassDest()
                         relaxou = True
+            if not relaxou:
+                break
     
+    def FordFulkerson(self, fontes, sorvedouros):
+        self.vertices.setInfoArestas(0)
+        
+        pass
     ##############################################################################################
     def DFSRec(self, inicio=None):
         if inicio != None and type(inicio) != type(""):
